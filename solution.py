@@ -25,38 +25,8 @@ def heur_displaced(state):
 
 def heur_manhattan_distance(state):
 #IMPLEMENT
-    '''admissible sokoban heuristic: manhattan distance
-        if state.boxes is None:
-        return 0
-    counter = 0
-    count = 0
-    for box in state.boxes:
-        print(box)
-        closest_dist = float("inf")
-        if state.restrictions is None:
-            for store in state.storage: 
-                dist = abs(box[0]-store[0])+abs(box[1]-store[1])
-                if closest_dist > dist:
-                    closest_dist = dist
-            counter = counter + closest_dist
-        else:
-            print(box)
-            print (state.restrictions[count])
-            for store in state.storage:
-                if store in state.restrictions[count]:
-                    print("**********")
-                    print(store)
-                    print("**********")
-                    print(box)
-                    print("**********")
-                    dist = abs(box[0]-store[0])+abs(box[1]-store[1])
-                    print(dist)
-                    print("**********")
-                    if closest_dist > dist:
-                        closest_dist = dist
-            counter = counter + closest_dist
-        count = count +1
-    return counter'''
+#DONE
+    '''admissible sokoban heuristic: manhattan distance'''
     '''INPUT: a sokoban state'''
     '''OUTPUT: a numeric value that serves as an estimate of the distance of the state to the goal.'''      
     #We want an admissible heuristic, which is an optimistic heuristic. 
@@ -80,7 +50,6 @@ def heur_manhattan_distance(state):
                 if closest_dist > dist:
                     closest_dist = dist
             counter = counter + closest_dist
-        #begin p2
         else:
             #current box
             #print(box)
