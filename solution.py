@@ -8,6 +8,7 @@
 
 # import os for time functions
 import os
+import time
 from search import * #for search engines
 from sokoban import SokobanState, Direction, PROBLEMS, sokoban_goal_state #for Sokoban specific classes and problems
 
