@@ -94,7 +94,7 @@ def fval_function(sN, weight):
     #The function must return a numeric f-value.
     #The value will determine your state's position on the Frontier list during a 'custom' search.
     #You must initialize your search engine object as a 'custom' search engine if you supply a custom fval function.
-    return 0
+    return sN.gval + weight * sN.hval
 
 def anytime_gbfs(initial_state, heur_fn, timebound = 10):
 #IMPLEMENT
