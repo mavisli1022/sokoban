@@ -109,17 +109,21 @@ def anytime_weighted_astar(initial_state, heur_fn, weight, timebound = 10):
     '''INPUT: a sokoban state that represents the start state and a timebound (number of seconds)'''
     '''OUTPUT: A goal state (if a goal is found), else False''' 
     start = time.time()
+    min_weight = 1
+    max_weight = 100
+    weight = max_weight
+    final = False
     se = SearchEngine('astar','default')
     se.init_search(initial_state, sokoban_goal_state, heur_fn, fval_function)
+    
     temp = se.search(timebound, None)
-    final = temp 
     while time.time() - start < timebound: 
-        if (temp.gval < final.gval) and temp is not False : 
+        if temp: # the weight finds a solution, try smaller weight
             final = temp
-            weight = max(1, weight/2)
+            weight = max (1, weight/3)
             temp = se.search(timebound/5, None)
-        else: #cannot find a sol-n.
-            weight = weight * 1.5
+        else: # current weight doesn't find a solution, try a greater weight
+            weight = weight * 1.1
             temp = se.search(timebound/5, None)
     return final or temp
 
