@@ -102,12 +102,25 @@ def anytime_gbfs(initial_state, heur_fn, timebound = 10):
     '''OUTPUT: A goal state (if a goal is found), else False''' 
     return False
 
-def anytime_weighted_astar(initial_state, heur_fn, weight=1., timebound = 10):
+def anytime_weighted_astar(initial_state, heur_fn, weight, timebound = 10):
 #IMPLEMENT
     '''Provides an implementation of anytime weighted a-star, as described in the HW1 handout'''
     '''INPUT: a sokoban state that represents the start state and a timebound (number of seconds)'''
     '''OUTPUT: A goal state (if a goal is found), else False''' 
-    return False
+    start = time.time()
+    se = SearchEngine('astar','default')
+    se.init_search(initial_state, sokoban_goal_state, heur_fn, fval_function)
+    temp = se.search(timebound, None)
+    final = temp 
+    while time.time() - start < timebound: 
+        if (temp.gval < final.gval) and temp is not False : 
+            final = temp
+            weight = max(1, weight/2)
+            temp = se.search(timebound/5, None)
+        else: #cannot find a sol-n.
+            weight = weight * 1.5
+            temp = se.search(timebound/5, None)
+    return final or temp
 
 if __name__ == "__main__":
   #TEST CODE
